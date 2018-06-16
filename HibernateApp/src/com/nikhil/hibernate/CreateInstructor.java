@@ -12,7 +12,7 @@ public class CreateInstructor {
                                 buildSessionFactory();
         
         Session session = fac.getCurrentSession();
-        
+        System.out.println("test");
         try {
             InstructorDetails details = new InstructorDetails();
             details.setChannel("YouTube:ByeWorld"); details.setHobby("Hockey");
