@@ -25,7 +25,7 @@ public class InstructorDetails {
     @Column(name="channel")
     private String channel;
     
-    @OneToOne(mappedBy="insDetails")
+   /* @OneToOne(mappedBy="insDetails")
     private Instructor instructor;
 
     public Instructor getInstructor() {
@@ -33,7 +33,8 @@ public class InstructorDetails {
     }
     public void setInstructor(Instructor instructor) {
         this.instructor = instructor;
-    }
+    }*/
+    
     public int getId() {
         return id;
     }

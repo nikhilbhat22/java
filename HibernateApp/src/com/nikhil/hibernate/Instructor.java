@@ -1,12 +1,17 @@
 package com.nikhil.hibernate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -31,7 +36,39 @@ public class Instructor {
     @JoinColumn(name="instructor_detail_id")
     private InstructorDetails insDetail;
     
-    public InstructorDetails getInsDetail() {
+    @OneToMany(mappedBy="instructor", fetch=FetchType.EAGER,
+    			cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private List<Course> courses;
+    
+    
+    public void addCourse(Course course) {
+    	if (courses == null) {
+    		courses = new ArrayList<>();
+    	}
+    	courses.add(course);
+    	course.setInstructor(this);
+    }
+    
+    public void print() {
+    	System.out.println("Instructor : " + firstName + ", " + lastName);
+    	System.out.println("Courses : ");
+    	for (Course c : courses) {
+    		System.out.print("\t" + c.getTitle());
+    	}
+    	System.out.println();
+    }
+    
+    
+    
+    
+    
+    public List<Course> getCourses() {
+		return courses;
+	}
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
+	}
+	public InstructorDetails getInsDetail() {
         return insDetail;
     }
     public void setInsDetail(InstructorDetails insDetail) {
